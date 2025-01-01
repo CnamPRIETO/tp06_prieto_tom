@@ -4,8 +4,4 @@
         Articles dans le panier : {{ nbProduitsPanier$ | async }}
         <span> | Connecté en tant que {{ username }}</span>
     </div>
-    <div *ngIf="!(isLoggedIn$ | async)">
-        <a routerLink="/login">Connexion</a>
-        <a routerLink="/register">Inscription</a>
-    </div>
 </header>
