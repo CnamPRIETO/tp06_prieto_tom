@@ -658,14 +658,12 @@ export class ProfilComponentComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onDeleteAccount() {
-    // Petite confirmation côté front :
+    // Petite confirmation
     if (confirm('Voulez-vous vraiment supprimer votre compte ?')) {
       this.authService.deleteAccount().subscribe({
         next: (res) => {
           console.log('Suppression réussie :', res);
-          // Après suppression, on déconnecte l’utilisateur :
           this.authService.logout();
-          // Et on le redirige vers la page d’accueil (ou /login)
           this.router.navigate(['/']);
         },
         error: (err) => {
@@ -1057,11 +1055,9 @@ export class ChangePasswordComponent {
       return;
     }
 
-    // RAZ du message d'erreur
     this.errorMessage = '';
 
-    // Construire l'objet de requête
-    // Selon votre logique, vous pouvez inclure oldPassword si vous voulez que le backend le vérifie
+    
     const userData = {
       oldPassword: this.oldPassword, 
       password: this.newPassword
@@ -1071,8 +1067,6 @@ export class ChangePasswordComponent {
     this.authService.updateUser(userData).subscribe({
       next: (response) => {
         this.successMessage = 'Mot de passe mis à jour avec succès.';
-        // Optionnel : Rediriger après un laps de temps
-        // this.router.navigate(['/profil']);
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Erreur lors de la mise à jour du mot de passe.';
@@ -1157,14 +1151,10 @@ export class LoginComponent {
 
 ===== ./app/header/header.component.html =====
 <header>
-    TP05 Tom PRIETO
+    TP06 Tom PRIETO
     <div *ngIf="isLoggedIn$ | async">
         Articles dans le panier : {{ nbProduitsPanier$ | async }}
         <span> | Connecté en tant que {{ username }}</span>
-    </div>
-    <div *ngIf="!(isLoggedIn$ | async)">
-        <a routerLink="/login">Connexion</a>
-        <a routerLink="/register">Inscription</a>
     </div>
 </header>
 
