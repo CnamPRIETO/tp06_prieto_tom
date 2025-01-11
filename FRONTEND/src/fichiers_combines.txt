@@ -1268,8 +1268,8 @@ bootstrapApplication(AppComponent, appConfig)
 ===== ./environments/environments.ts =====
 export const environment = {
     production: false,
-    backendProduit : 'https://produit-api.onrender.com/api/produits',
-    backendUser : 'https://api-user-yuuq.onrender.com/api'
+    backendProduit : 'https://cnamappsansbdd.onrender.com/api/produits',
+    backendUser : 'https://cnamappsansbdd.onrender.com/api'
 };
 
 ===== ./assets/mock/produit.json =====
