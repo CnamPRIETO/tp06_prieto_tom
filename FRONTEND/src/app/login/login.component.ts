@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { LoginResponse } from '../models/auth-response.interface';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent {
 
   onLogin() {
     this.authService.login(this.username, this.password).subscribe({
-      next: () => this.router.navigate(['/']),
+      next: (response: LoginResponse) => this.router.navigate(['/']),
       error: err => this.errorMessage = err.error.message || 'Erreur lors de la connexion.'
     });
   }

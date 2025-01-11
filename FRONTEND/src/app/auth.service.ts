@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { RegisterResponse, LoginResponse, UpdateUserResponse } from "./models/auth-response.interface";
+import { User } from './models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +22,9 @@ export class AuthService {
     return this.loggedIn.asObservable();
   }
 
-  login(username: string, password: string): Observable<any> {
+  login(username: string, password: string): Observable<LoginResponse> {
     return this.apiService.login(username, password).pipe(
-      tap((response: any) => {
+      tap((response: LoginResponse) => {
         if (response.token) {
           localStorage.setItem(this.tokenKey, response.token);
           this.loggedIn.next(true);
@@ -31,7 +33,7 @@ export class AuthService {
     );
   }
 
-  register(username: string, password: string): Observable<any> {
+  register(username: string, password: string): Observable<RegisterResponse> {
     return this.apiService.register(username, password);
   }
 
@@ -44,7 +46,7 @@ export class AuthService {
     return localStorage.getItem(this.tokenKey);
   }
 
-  updateUser(userData: any): Observable<any> {
+  updateUser(userData: User): Observable<UpdateUserResponse> {
     const token = this.getToken();
     if (token) {
       return this.apiService.updateUser(userData, token);
@@ -53,7 +55,7 @@ export class AuthService {
     }
   }
 
-  deleteAccount(): Observable<any> {
+  deleteAccount(): Observable<RegisterResponse> {
     const token = this.getToken(); // lit le token depuis le localStorage
     if (!token) {
       throw new Error('No token found');

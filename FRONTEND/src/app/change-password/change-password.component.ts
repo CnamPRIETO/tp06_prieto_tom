@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { User } from '../models/user';
+import { UpdateUserResponse } from '../models/auth-response.interface';
 
 @Component({
   selector: 'app-change-password',

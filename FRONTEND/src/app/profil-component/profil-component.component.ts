@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { RegisterResponse } from '../models/auth-response.interface';
 
 @Component({
   selector: 'app-profil-component',
@@ -15,7 +16,7 @@ export class ProfilComponentComponent {
     // Petite confirmation
     if (confirm('Voulez-vous vraiment supprimer votre compte ?')) {
       this.authService.deleteAccount().subscribe({
-        next: (res) => {
+        next: (res: RegisterResponse) => {
           console.log('Suppression réussie :', res);
           this.authService.logout();
           this.router.navigate(['/']);
